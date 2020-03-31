@@ -1,0 +1,22 @@
+.container {
+  // margin: 0;
+  padding: 2rem;
+}
+
+table {
+  text-align: left;
+  position: relative;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.25rem;
+}
+
+th {
+  background: rgb(247, 180, 103);
+  position: sticky;
+  top: 0;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
