@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StatisticsContext } from "../contexts/StatisticsContext";
-import { Segment, Table } from "semantic-ui-react";
-import "./Table.scss";
-import Country from "./Country";
+import { Segment, Table, Popup } from "semantic-ui-react";
 
 const StatisticsTable = () => {
   const [state, dispatch] = useContext(StatisticsContext);
@@ -12,11 +10,19 @@ const StatisticsTable = () => {
     setCountries(state.statistics);
   }, [state]);
 
-  if (state.statistics.length) {
+  if (countries.length) {
     countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
     const rows = countries.map(item => (
-      <Table.Row>
-        <Table.Cell>{item.Country}</Table.Cell>
+      <Table.Row key={item.Country}>
+        <Popup
+          trigger={<Table.Cell>{item.Country}</Table.Cell>}
+          inverted={true}
+          position="left center"
+          size="mini"
+        >
+          {item.Country}
+        </Popup>
+
         <Table.Cell>{item.TotalConfirmed}</Table.Cell>
         <Table.Cell>{item.TotalDeaths}</Table.Cell>
         <Table.Cell>{item.TotalRecovered}</Table.Cell>

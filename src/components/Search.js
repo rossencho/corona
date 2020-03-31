@@ -1,24 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import { StatisticsContext } from "../contexts/StatisticsContext";
-import {
-  getStatistics,
-  getStatisticsByCountry
-} from "../services/getStatistics";
-import "./Table.scss";
+import { getStatistics } from "../services/getStatistics";
 
 const Search = () => {
   const [state, dispatch] = useContext(StatisticsContext);
   const [userInput, setUserInput] = useState("");
   const [country, setCountry] = useState("");
-  const [summat, setSummary] = useState([]);
-
-  const loadStatisByCountry = async () => {
-    let res = await getStatisticsByCountry(country);
-    dispatch({
-      type: "GET_COUNTRY_STATISTICS",
-      payload: { country, stats: res.data }
-    });
-  };
+  const [summary, setSummary] = useState([]);
 
   const loadStatistics = async () => {
     let res = await getStatistics();
@@ -30,13 +18,23 @@ const Search = () => {
   };
 
   useEffect(() => {
-    country.length ? loadStatisByCountry() : loadStatistics();
+    loadStatistics();
   }, [country]);
 
   const onChange = e => {
     e.preventDefault();
     setUserInput(e.target.value);
+    if (summary !== undefined) {
+      const data = summary.filter(item => {
+        return item.Country.toLowerCase().includes(e.target.value);
+      });
+      dispatch({
+        type: "GET_COUNTRY_STATISTICS",
+        payload: { country: e.target.value, stats: data }
+      });
+    }
   };
+
   const onSubmit = e => {
     e.preventDefault();
     setCountry(userInput);
