@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StatisticsContext } from "../contexts/StatisticsContext";
 import { Segment, Table, Popup } from "semantic-ui-react";
+import "./StatisticsTable.css";
 
 const StatisticsTable = () => {
   const [state, dispatch] = useContext(StatisticsContext);

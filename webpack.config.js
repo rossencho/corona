@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 //var { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const extractPlugin = new ExtractTextPlugin({ filename: "main.css" });
@@ -39,9 +40,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: extractPlugin.extract({
-          use: ["style-loader", "css-loader"]
-        })
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -68,6 +67,7 @@ module.exports = {
   },
   plugins: [
     extractPlugin,
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src", "index.html")
     })
