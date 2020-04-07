@@ -34,7 +34,7 @@ const CountryInfo = (props) => {
         if (newData[i].Cases) {
           row.value = newData[i].Cases - res.data[i - 1].Cases;
         } else {
-          row.vale = newData[i].Cases = 0;
+          row.value = newData[i].Cases = 0;
         }
       } else {
         row.value = newData[i].Cases;
