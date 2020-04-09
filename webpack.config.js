@@ -14,9 +14,10 @@ module.exports = {
   entry: SRC_DIR + "/index.js",
   output: {
     path: DIST_DIR,
-    filename: "bundle.js"
+    filename: "bundle.js",
     // publicPath: "dist"
   },
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -27,28 +28,28 @@ module.exports = {
             loader: "babel-loader",
             options: {
               presets: ["@babel/preset-env", "@babel/preset-react"],
-              plugins: ["@babel/plugin-transform-runtime"]
-            }
-          }
-        ]
+              plugins: ["@babel/plugin-transform-runtime"],
+            },
+          },
+        ],
       },
       {
         test: /\.scss$/,
         use: extractPlugin.extract({
-          use: ["css-loader", "sass-loader"]
-        })
+          use: ["css-loader", "sass-loader"],
+        }),
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loader: "url-loader?limit=100000"
+        loader: "url-loader?limit=100000",
       },
       {
         test: /\.html$/,
-        use: ["html-loader"]
+        use: ["html-loader"],
       },
       {
         test: /\.(jpg|png$)/,
@@ -58,18 +59,18 @@ module.exports = {
             options: {
               name: "[name].[ext]",
               outputPath: "img/",
-              publicPath: "img/"
-            }
-          }
-        ]
-      }
-    ]
+              publicPath: "img/",
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     extractPlugin,
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "src", "index.html")
-    })
-  ]
+      template: path.resolve(__dirname, "src", "index.html"),
+    }),
+  ],
 };

@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  BarChart,
-  YAxis,
-  XAxis,
-  CartesianGrid,
-  Bar,
-  LabelList,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { BarChart, YAxis, XAxis, CartesianGrid, Bar, Tooltip } from "recharts";
 import { getNewConfirmed } from "../services/getStatistics";
-import { Label } from "semantic-ui-react";
 
 const CountryInfo = (props) => {
   const [chartData, setChartData] = useState(null);

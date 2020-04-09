@@ -13,7 +13,7 @@ const Search = () => {
     setSummary(res.data.Countries);
     dispatch({
       type: "GET_STATISTICS",
-      payload: { country: -1, stats: res.data.Countries }
+      payload: { country: -1, stats: res.data.Countries },
     });
   };
 
@@ -21,21 +21,21 @@ const Search = () => {
     loadStatistics();
   }, [country]);
 
-  const onChange = e => {
+  const onChange = (e) => {
     e.preventDefault();
     setUserInput(e.target.value);
     if (summary !== undefined) {
-      const data = summary.filter(item => {
+      const data = summary.filter((item) => {
         return item.Country.toLowerCase().includes(e.target.value);
       });
       dispatch({
         type: "GET_COUNTRY_STATISTICS",
-        payload: { country: e.target.value, stats: data }
+        payload: { country: e.target.value, stats: data },
       });
     }
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     setCountry(userInput);
   };
