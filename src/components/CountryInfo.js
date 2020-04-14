@@ -13,7 +13,7 @@ const CountryInfo = (props) => {
   const loadConfirmed = async (country) => {
     let res = await getNewConfirmed(country);
     for (let k = 0; k < res.data.length; k++) {
-      if (!res.data[k].hasOwnProperty("Province")) {
+      if (res.data[k].Province.length === 0) {
         newData.push(res.data[k]);
       }
     }
