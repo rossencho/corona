@@ -15,8 +15,10 @@ const StatisticsTable = (props) => {
 
   if (countries.length) {
     countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
+    let i = 1;
     const rows = countries.map((item) => (
       <Table.Row key={item.Slug}>
+        <Table.Cell>{i++}</Table.Cell>
         <Table.Cell>
           <Link to={`/countryInfo/${item.Slug}`}>{item.Country}</Link>
         </Table.Cell>
@@ -35,6 +37,7 @@ const StatisticsTable = (props) => {
           <Table celled striped selectable>
             <Table.Header>
               <Table.Row>
+                <Table.HeaderCell>Rank</Table.HeaderCell>
                 <Table.HeaderCell>Country</Table.HeaderCell>
                 <Table.HeaderCell>Total confirmed</Table.HeaderCell>
                 <Table.HeaderCell>Total deaths</Table.HeaderCell>
